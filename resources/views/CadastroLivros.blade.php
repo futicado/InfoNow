@@ -22,13 +22,14 @@
 
                 <h4 class="mb-3">Informações</h4>
                 <hr class="mb-4">
-                <form class="needs-validation" novalidate action="{{route('cadastrolivrosubmissao')}}" method="post">
+                <form class="needs-validation" novalidate action="{{route('cadastrolivro
+                submissao')}}" method="post">
                     @csrf
                     <div class="row">
                     <table class="table">
             <tbody>
               <tr>
-                  
+
                   <div class="col-md-15 mb-3">
                             <label for="firstName">Nome do Item</label>
                             <input class="form-control" id="firstName" name="nomeitem" list="textos" />
@@ -47,7 +48,7 @@
                       <input type="radio" name="options0" id="option1"  autocomplete="off" value="1" > <span style='font-size:20px;'>&#128578;</span></label>
                     <label class="btn btn-warning">
                       <input type="radio" name="options0" id="option3" autocomplete="off" value="0"> <span style='font-size:20px;'>&#128577;</span></label>
-                  </div></p>  
+                  </div></p>
               </tr>
               <tr>
                 <p class="lead"> 2 - Pintura? </p>
@@ -59,7 +60,7 @@
                     <input type="radio" name="options1" id="option2" autocomplete="off" value="2"> <span style='font-size:20px;'>&#128528;</span></label>
                   <label class="btn btn-warning">
                     <input type="radio" name="options1" id="option3" autocomplete="off" value="0"> <span style='font-size:20px;'>&#128577;</span></label>
-                </div></p>     
+                </div></p>
             </tr>
             <tr>
               <p class="lead"> 3 - Sem corrosões? </p>
@@ -71,7 +72,7 @@
                   <input type="radio" name="options2" id="option2" autocomplete="off" value="2"> <span style='font-size:20px;'>&#128528;</span></label>
                 <label class="btn btn-warning">
                   <input type="radio" name="options2" id="option3" autocomplete="off" value="0"> <span style='font-size:20px;'>&#128577;</span></label>
-              </div></p> 
+              </div></p>
           </tr>
           <tr>
             <p class="lead"> 4 - Cabos? </p>
@@ -83,7 +84,7 @@
                 <input type="radio" name="options3" id="option2" autocomplete="off" value="2"> <span style='font-size:20px;'>&#128528;</span></label>
               <label class="btn btn-warning">
                 <input type="radio" name="options3" id="option3" autocomplete="off" value="0"> <span style='font-size:20px;'>&#128577;</span></label>
-            </div></p>     
+            </div></p>
         </tr>
         <tr>
           <p class="lead"> 5 - Travas de segurança?</p>
@@ -95,7 +96,7 @@
               <input type="radio" name="options4" id="option2" autocomplete="off" value="2"> <span style='font-size:20px;'>&#128528;</span></label>
             <label class="btn btn-warning">
               <input type="radio" name="options4" id="option3" autocomplete="off" value="0"> <span style='font-size:20px;'>&#128577;</span></label>
-          </div></p>      
+          </div></p>
           </tr>
           <tr>
             <p class="lead"> 6 - Nível do óleo? </p>
@@ -107,7 +108,7 @@
               <input type="radio" name="options5" id="option2" autocomplete="off" value="2"> <span style='font-size:20px;'>&#128528;</span></label>
               <label class="btn btn-warning">
               <input type="radio" name="options5" id="option3" autocomplete="off" value="0"> <span style='font-size:20px;'>&#128577;</span></label>
-              </div></p>  
+              </div></p>
               </tr>
               <tr>
                 <p class="lead"> 7 - Sem vazamentos? </p>
@@ -131,7 +132,7 @@
                   <input type="radio" name="options7" id="option2" autocomplete="off" value="2"> <span style='font-size:20px;'>&#128528;</span></label>
                 <label class="btn btn-warning">
                   <input type="radio" name="options7" id="option3" autocomplete="off" value="0"> <span style='font-size:20px;'>&#128577;</span></label>
-              </div></p> 
+              </div></p>
             </tr>
             <tr>
               <p class="lead"> 9 - Rotação? </p>
@@ -143,7 +144,7 @@
                   <input type="radio" name="options8" id="option2" autocomplete="off" value="2"> <span style='font-size:20px;'>&#128528;</span></label>
                 <label class="btn btn-warning">
                   <input type="radio" name="options8" id="option3" autocomplete="off" value="0"> <span style='font-size:20px;'>&#128577;</span></label>
-              </div></p> 
+              </div></p>
             </tr>
             <tr>
               <p class="lead"> 10 - Partes soltas ? </p>
@@ -156,11 +157,11 @@
                 <label class="btn btn-warning">
                   <input type="radio" name="options9" id="option3" autocomplete="off" value="0"> <span style='font-size:20px;'>&#128577;</span></label>
               </div>
-              </p> 
+              </p>
             </tr>
             </tbody>
             </table>
-                    
+
                     <button class="btn btn-primary btn-lg btn-block" type="submit">Salvar</button>
                 </form>
             </div>

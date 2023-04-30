@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 30/04/2023 às 06:55
+-- Tempo de geração: 30/04/2023 às 10:43
 -- Versão do servidor: 10.4.28-MariaDB
 -- Versão do PHP: 8.0.28
 
@@ -34,8 +34,16 @@ CREATE TABLE `tbhistorico` (
   `nome` varchar(60) NOT NULL,
   `usercad` varchar(60) NOT NULL,
   `codigoItem` int(11) NOT NULL,
-  `data` date NOT NULL
+  `data` date NOT NULL,
+  `hora` varchar(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Despejando dados para a tabela `tbhistorico`
+--
+
+INSERT INTO `tbhistorico` (`codigoh`, `nome`, `usercad`, `codigoItem`, `data`, `hora`) VALUES
+(1, 'Teste de cadastro de item', 'jhonatan.silva@rede.ulbra.br', 1, '2023-04-30', '0');
 
 -- --------------------------------------------------------
 
@@ -53,10 +61,19 @@ CREATE TABLE `tbitens` (
   `travas` int(11) NOT NULL,
   `oleo` int(11) NOT NULL,
   `vazamento` int(11) NOT NULL,
+  `pressoleo` int(11) NOT NULL,
   `rotacao` int(11) NOT NULL,
   `partesoltas` int(11) NOT NULL,
-  `usercad` varchar(60) NOT NULL
+  `usercad` varchar(60) NOT NULL,
+  `conformidade` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Despejando dados para a tabela `tbitens`
+--
+
+INSERT INTO `tbitens` (`codigo`, `nome`, `trinca`, `pintura`, `corrosao`, `cabos`, `travas`, `oleo`, `vazamento`, `pressoleo`, `rotacao`, `partesoltas`, `usercad`, `conformidade`) VALUES
+(1, 'Teste de cadastro de item', 1, 1, 2, 2, 2, 2, 2, 2, 2, 0, 'jhonatan.silva@rede.ulbra.br', 0);
 
 --
 -- Acionadores `tbitens`
@@ -67,7 +84,7 @@ CREATE TRIGGER `historico` AFTER INSERT ON `tbitens` FOR EACH ROW BEGIN
        SELECT IFNULL(max(codigoh),0) into x from tbhistorico;
        
        INSERT INTO `tbhistorico`(`codigoh`,`codigoItem`, `data`,`nome`,`usercad`) 
-       VALUES (x+1,NEW.codigo,CURdate(),NEW.nome, NEW.usercad);
+       VALUES (x+1,NEW.codigo,NEW.nome, NEW.usercad,CURdate(),CURtime());
 END
 $$
 DELIMITER ;
@@ -84,6 +101,13 @@ CREATE TABLE `tbusuario` (
   `emailu` varchar(30) NOT NULL,
   `senhau` varchar(30) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Despejando dados para a tabela `tbusuario`
+--
+
+INSERT INTO `tbusuario` (`Pkcodu`, `Nomeu`, `emailu`, `senhau`) VALUES
+(64, 'Jhonatan Matos da Silva', 'jhonatan.silva@rede.ulbra.br', 'jhonatan.silva@rede.ulbra.br');
 
 --
 -- Índices para tabelas despejadas
@@ -116,13 +140,13 @@ ALTER TABLE `tbusuario`
 -- AUTO_INCREMENT de tabela `tbitens`
 --
 ALTER TABLE `tbitens`
-  MODIFY `codigo` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `codigo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT de tabela `tbusuario`
 --
 ALTER TABLE `tbusuario`
-  MODIFY `Pkcodu` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=64;
+  MODIFY `Pkcodu` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=65;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

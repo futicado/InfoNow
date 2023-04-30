@@ -12,6 +12,7 @@ use Illuminate\Mail\Mailer as MailMailer;
 use Illuminate\Support\Facades\Mail;
 use PhpParser\Node\Stmt\Break_;
 use PhpParser\Node\Stmt\Else_;
+use Symfony\Component\Console\Input\Input;
 
 use function PHPUnit\Framework\isEmpty;
 use function PHPUnit\Framework\isNull;
@@ -45,18 +46,20 @@ class Main extends Controller
         if ($request->session()->has('email') == null) {
             return redirect()->route('dashboardl');
         } else {
-            $lista = DB::select('select * from tblivro');
+            ///$lista = DB::select('select * from tblivro');
             // buscar no banco as informações e comparar.
-            return view('Dashboard', ['lista' => $lista]);
+            //return view('Dashboard', ['lista' => $lista]);
+            return view('Dashboard');
         }
     }
 
     public function dashboardl(Request $request)
     {
         if ($request->session()->has('email') == null) {
-            $lista = DB::select('select * from tblivro');
+            //$lista = DB::select('select * from tblivro');
             // buscar no banco as informações e comparar.
-            return view('Dashboardl', ['lista' => $lista]);
+            //return view('Dashboardl', ['lista' => $lista]);
+            return view('Dashboardl');
         }
     }
 
@@ -68,60 +71,35 @@ class Main extends Controller
 
         // realizar o cadastro no banco de dados
           $nome = $request->input('nomeitem');
-          echo$op0= $request->input('options0');
-          echo$op1= $request->input('options1');
-          echo$op2= $request->input('options2');
-          echo$op3= $request->input('options3');
-          echo$op4= $request->input('options4');
-          echo$op5= $request->input('options5');
-          echo$op6= $request->input('options6');
-          echo$op7= $request->input('options7');
-          echo $op8= $request->input('options8');
-          echo $op9= $request->input('options9');
-          $data = date("yyYY-m-d");
+          $op[0]= $request->input('options0');
+          $op[1]= $request->input('options1');
+          $op[2]= $request->input('options2');
+          $op[3]= $request->input('options3');
+          $op[4]= $request->input('options4');
+          $op[5]= $request->input('options5');
+          $op[6]= $request->input('options6');
+          $op[7]= $request->input('options7');
+          $op[8]= $request->input('options8');
+          $op[9]= $request->input('options9');
 
-          if($request->input('options0') == 1){$a=1;}
-          if($request->input('options1') == 1){$a=1;}
-          if($request->input('options2') == 1){$a=1;}
-          if($request->input('options3') == 1){$a=1;}
-          if($request->input('options4') == 1){$a=1;}
-          if($request->input('options5') == 1){$a=1;}
-          if($request->input('options6') == 1){$a=1;}
-          if($request->input('options7') == 1){$a=1;}
-          if($request->input('options8') == 1){$a=1;}
-          if($request->input('options9') == 1){$a=1;}
+         $usercad= session()->get('email');
 
-          if($request->input('options0') == 2){$b=1;}
-          if($request->input('options1') == 2){$b=1;}
-          if($request->input('options2') == 2){$b=1;}
-          if($request->input('options3') == 2){$b=1;}
-          if($request->input('options4') == 2){$b=1;}
-          if($request->input('options5') == 2){$b=1;}
-          if($request->input('options6') == 2){$b=1;}
-          if($request->input('options7') == 2){$b=1;}
-          if($request->input('options8') == 2){$b=1;}
-          if($request->input('options9') == 2){$b=1;}
 
-          $c=0;
-          if($request->input('options0') == 0){$c=1;}
-          if($request->input('options1') == 0){$c=1;}
-          if($request->input('options2') == 0){$c=1;}
-          if($request->input('options3') == 0){$c=1;}
-          if($request->input('options4') == 0){$c=1;}
-          if($request->input('options5') == 0){$c=1;}
-          if($request->input('options6') == 0){$c=1;}
-          if($request->input('options7') == 0){$c=1;}
-          if($request->input('options8') == 0){$c=1;}
-          if($request->input('options9') == 0){$c=1;}
+          for($i=0; $i<10; $i++){
+            if($op[$i]==0){
+                $acum=0;
+            }else{$acum=1;}
+          }
 
-          if($a==1 and $b==1 and $c==0){
-            echo "conformidade";
-            $status=1;
-          }else{
-            echo "Incoformidade";
+          if($acum==0){
             $status=0;
-        }
+          }else{
+            $status=1;
+          }
 
+       // $dados =DB::insert('insert into users (id, name) values (?, ?)', [1, 'Dayle'])
+      // fazer a inserção no banco de dados
+       //  return redirect()->route('dashboard', ['dasdos' => $dados]);
 
     }
 
@@ -152,7 +130,7 @@ class Main extends Controller
         echo "<script>alert('E-mail enviado com sucesso !!!');</script>";
 
         // return redirect()->action('Main@dashboard')->with('mensagem','E-mail enviado com sucesso!' );
-        $lista = DB::select('select * from tblivro');
+       // $lista = DB::select('select * from tblivro');
 
         // buscar no banco as informações e comparar.
         return redirect()->route('dashboard', ['lista' => $lista]);
@@ -251,9 +229,10 @@ class Main extends Controller
             return view('cadastro');
         }
 
-        $lista = DB::select('select * from tblivro');
+        //$lista = DB::select('select * from tblivro');
         // buscar no banco as informações e comparar.
-        return view('Dashboard', ['lista' => $lista]);
+        //return view('Dashboard', ['lista' => $lista]);
+        return view('Dashboard');
     }
 
     public function excluir(Request $request, $id)
@@ -269,14 +248,15 @@ class Main extends Controller
             DB::delete("delete From tblivro where pkcodliv=$id");
             echo "<script>alert('Anuncio do livro excluído com sucesso !!!');</script>";
 
-            $lista = DB::select('select * from tblivro');
+            //$lista = DB::select('select * from tblivro');
             // buscar no banco as informações e comparar.
+            //return redirect()->route('dashboard');
             return redirect()->route('dashboard');
 
 
         }else {
             echo "<script>alert('Anuncio do livro não pode ser excluído, pois pertence a outro usuário !!!');</script>";
-            $lista = DB::select('select * from tblivro');
+           // $lista = DB::select('select * from tblivro');
 
             // buscar no banco as informações e comparar.
             return redirect()->route('dashboard');

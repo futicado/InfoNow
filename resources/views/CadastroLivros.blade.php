@@ -22,8 +22,7 @@
 
                 <h4 class="mb-3">Informações</h4>
                 <hr class="mb-4">
-                <form class="needs-validation" novalidate action="{{route('cadastrolivro
-                submissao')}}" method="post">
+                <form class="needs-validation" novalidate action="{{route('cadastrolivrosubmissao')}}" method="post">
                     @csrf
                     <div class="row">
                     <table class="table">

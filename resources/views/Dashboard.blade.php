@@ -9,9 +9,8 @@
     <script src="https://cdn.jsdelivr.net/npm/sharer.js@latest/sharer.min.js"></script>
     <nav class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0">
         <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="{{ route('dashboard') }}">InfoNow</a>
-        <div style="width:50%"><input class="form-control" disabled style="visibility:hidden"type="text" placeholder="Buscar Livros" aria-label="Buscar Livros">
+        <div style="width:50%">
         </div>
-
         <div class="dropdown">
             <button class="btn btn-default dropdown-toggle" type="button"
                 data-toggle="dropdown">{{ session()->get('email') }}
@@ -57,7 +56,7 @@
                         </li>
 
 
-                        
+
                     </ul>
 
                     <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
@@ -97,34 +96,14 @@
                     </div>
                 </div>
 
-               
-                
-                        
+
+
+
                     </div>
                 </div>
         </div>
 
 
-   
-
-    <script>
-        document.addEventListener("DOMContentLoaded", function(event) {
 
 
-            var shareUrl = window.location.href;
-            var shareTitle = document.title;
-            var shareSubject = "Ótima página para doar ou trocar seus Livros ";
-            var shareImage = "PlataformadeLivros@gmail.com.br";
-            var shareDescription = "PlataformadeLivros@gmail.com.br";
-
-
-            //facebook
-            $('#share-fb').attr('data-url', shareUrl).attr('data-sharer', 'facebook');
-            //twitter
-            $('#share-tw').attr('data-url', shareUrl).attr('data-title', shareTitle).attr('data-sharer', 'twitter');
-
-            window.Sharer.init();
-
-        });
-    </script>
 @endsection

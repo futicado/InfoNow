@@ -31,9 +31,12 @@
 
                   <div class="col-md-15 mb-3">
                             <label for="firstName">Nome do Item</label>
-                            <input class="form-control" id="firstName" name="nomeitem" list="textos" />
+                            <input class="form-control" id="firstName" name="nomeitem" list="textos" required />
                         <datalist id="textos">
-                            <option value="" name="item">
+                            @foreach ($list as $i )
+                             <option value='{{$i->nome;}}' name="item">
+                            @endforeach
+
                         </datalist>
                             <div class="invalid-feedback">
                                 Necessário inserir o nome do Item
@@ -44,9 +47,9 @@
                 <p class="lead">
                   <div class="btn-group btn-group-toggle" data-toggle="buttons">
                     <label class="btn btn-warning ">
-                      <input type="radio" name="options0" id="option1"  autocomplete="off" value="1" > <span style='font-size:20px;'>&#128578;</span></label>
+                      <input type="radio" name="options0" id="option1"  autocomplete="off" value="1" required > <span style='font-size:20px;'>&#128578;</span></label>
                     <label class="btn btn-warning">
-                      <input type="radio" name="options0" id="option3" autocomplete="off" value="0"> <span style='font-size:20px;'>&#128577;</span></label>
+                      <input type="radio" name="options0" id="option3" autocomplete="off" value="0" required> <span style='font-size:20px;'>&#128577;</span></label>
                   </div></p>
               </tr>
               <tr>
@@ -54,11 +57,11 @@
                 <p class="lead">
                 <div class="btn-group btn-group-toggle" data-toggle="buttons">
                   <label class="btn btn-warning ">
-                    <input type="radio" name="options1" id="option1" autocomplete="off" value="1"> <span style='font-size:20px;'>&#128578;</span></label>
+                    <input type="radio" name="options1" id="option1" autocomplete="off" value="1" required> <span style='font-size:20px;'>&#128578;</span></label>
                   <label class="btn btn-warning">
-                    <input type="radio" name="options1" id="option2" autocomplete="off" value="2"> <span style='font-size:20px;'>&#128528;</span></label>
+                    <input type="radio" name="options1" id="option2" autocomplete="off" value="2" required> <span style='font-size:20px;'>&#128528;</span></label>
                   <label class="btn btn-warning">
-                    <input type="radio" name="options1" id="option3" autocomplete="off" value="0"> <span style='font-size:20px;'>&#128577;</span></label>
+                    <input type="radio" name="options1" id="option3" autocomplete="off" value="0" required> <span style='font-size:20px;'>&#128577;</span></label>
                 </div></p>
             </tr>
             <tr>
@@ -66,11 +69,11 @@
               <p class="lead">
               <div class="btn-group btn-group-toggle" data-toggle="buttons">
                 <label class="btn btn-warning ">
-                  <input type="radio" name="options2" id="option1"  autocomplete="off" value="1"> <span style='font-size:20px;'>&#128578;</span></label>
+                  <input type="radio" name="options2" id="option1"  autocomplete="off" value="1" required> <span style='font-size:20px;'>&#128578;</span></label>
                 <label class="btn btn-warning">
-                  <input type="radio" name="options2" id="option2" autocomplete="off" value="2"> <span style='font-size:20px;'>&#128528;</span></label>
+                  <input type="radio" name="options2" id="option2" autocomplete="off" value="2" required> <span style='font-size:20px;'>&#128528;</span></label>
                 <label class="btn btn-warning">
-                  <input type="radio" name="options2" id="option3" autocomplete="off" value="0"> <span style='font-size:20px;'>&#128577;</span></label>
+                  <input type="radio" name="options2" id="option3" autocomplete="off" value="0" required> <span style='font-size:20px;'>&#128577;</span></label>
               </div></p>
           </tr>
           <tr>
@@ -78,11 +81,11 @@
             <p class="lead">
             <div class="btn-group btn-group-toggle" data-toggle="buttons">
               <label class="btn btn-warning ">
-                <input type="radio" name="options3" id="option1" autocomplete="off" value="1"> <span style='font-size:20px;'>&#128578;</span></label>
+                <input type="radio" name="options3" id="option1" autocomplete="off" value="1" required> <span style='font-size:20px;'>&#128578;</span></label>
               <label class="btn btn-warning">
-                <input type="radio" name="options3" id="option2" autocomplete="off" value="2"> <span style='font-size:20px;'>&#128528;</span></label>
+                <input type="radio" name="options3" id="option2" autocomplete="off" value="2" required> <span style='font-size:20px;'>&#128528;</span></label>
               <label class="btn btn-warning">
-                <input type="radio" name="options3" id="option3" autocomplete="off" value="0"> <span style='font-size:20px;'>&#128577;</span></label>
+                <input type="radio" name="options3" id="option3" autocomplete="off" value="0" required> <span style='font-size:20px;'>&#128577;</span></label>
             </div></p>
         </tr>
         <tr>
@@ -90,11 +93,11 @@
           <p class="lead">
           <div class="btn-group btn-group-toggle" data-toggle="buttons">
             <label class="btn btn-warning ">
-              <input type="radio" name="options4" id="option1" autocomplete="off" value="1"> <span style='font-size:20px;'>&#128578;</span></label>
+              <input type="radio" name="options4" id="option1" autocomplete="off" value="1" required> <span style='font-size:20px;'>&#128578;</span></label>
             <label class="btn btn-warning">
-              <input type="radio" name="options4" id="option2" autocomplete="off" value="2"> <span style='font-size:20px;'>&#128528;</span></label>
+              <input type="radio" name="options4" id="option2" autocomplete="off" value="2" required> <span style='font-size:20px;'>&#128528;</span></label>
             <label class="btn btn-warning">
-              <input type="radio" name="options4" id="option3" autocomplete="off" value="0"> <span style='font-size:20px;'>&#128577;</span></label>
+              <input type="radio" name="options4" id="option3" autocomplete="off" value="0" required> <span style='font-size:20px;'>&#128577;</span></label>
           </div></p>
           </tr>
           <tr>
@@ -102,11 +105,11 @@
             <p class="lead">
             <div class="btn-group btn-group-toggle" data-toggle="buttons">
             <label class="btn btn-warning ">
-            <input type="radio" name="options5" id="option1" autocomplete="off" value="1"> <span style='font-size:20px;'>&#128578;</span></label>
+            <input type="radio" name="options5" id="option1" autocomplete="off" value="1" required> <span style='font-size:20px;'>&#128578;</span></label>
               <label class="btn btn-warning">
-              <input type="radio" name="options5" id="option2" autocomplete="off" value="2"> <span style='font-size:20px;'>&#128528;</span></label>
+              <input type="radio" name="options5" id="option2" autocomplete="off" value="2" required> <span style='font-size:20px;'>&#128528;</span></label>
               <label class="btn btn-warning">
-              <input type="radio" name="options5" id="option3" autocomplete="off" value="0"> <span style='font-size:20px;'>&#128577;</span></label>
+              <input type="radio" name="options5" id="option3" autocomplete="off" value="0" required> <span style='font-size:20px;'>&#128577;</span></label>
               </div></p>
               </tr>
               <tr>
@@ -114,11 +117,11 @@
                 <p class="lead">
                 <div class="btn-group btn-group-toggle" data-toggle="buttons">
                   <label class="btn btn-warning ">
-                    <input type="radio" name="options6" id="option1" autocomplete="off" value="1"> <span style='font-size:20px;'>&#128578;</span></label>
+                    <input type="radio" name="options6" id="option1" autocomplete="off" value="1" required> <span style='font-size:20px;'>&#128578;</span></label>
                   <label class="btn btn-warning">
-                    <input type="radio" name="options6" id="option2" autocomplete="off" value="2"> <span style='font-size:20px;'>&#128528;</span></label>
+                    <input type="radio" name="options6" id="option2" autocomplete="off" value="2" required> <span style='font-size:20px;'>&#128528;</span></label>
                   <label class="btn btn-warning">
-                    <input type="radio" name="options6" id="option3" autocomplete="off" value="0"> <span style='font-size:20px;'>&#128577;</span></label>
+                    <input type="radio" name="options6" id="option3" autocomplete="off" value="0" required> <span style='font-size:20px;'>&#128577;</span></label>
                 </div></p>
             </tr>
             <tr>
@@ -126,11 +129,11 @@
               <p class="lead">
               <div class="btn-group btn-group-toggle" data-toggle="buttons">
                 <label class="btn btn-warning ">
-                  <input type="radio" name="options7" id="option1" autocomplete="off" value="1"> <span style='font-size:20px;'>&#128578;</span></label>
+                  <input type="radio" name="options7" id="option1" autocomplete="off" value="1" required> <span style='font-size:20px;'>&#128578;</span></label>
                 <label class="btn btn-warning">
-                  <input type="radio" name="options7" id="option2" autocomplete="off" value="2"> <span style='font-size:20px;'>&#128528;</span></label>
+                  <input type="radio" name="options7" id="option2" autocomplete="off" value="2" required> <span style='font-size:20px;'>&#128528;</span></label>
                 <label class="btn btn-warning">
-                  <input type="radio" name="options7" id="option3" autocomplete="off" value="0"> <span style='font-size:20px;'>&#128577;</span></label>
+                  <input type="radio" name="options7" id="option3" autocomplete="off" value="0" required> <span style='font-size:20px;'>&#128577;</span></label>
               </div></p>
             </tr>
             <tr>
@@ -138,11 +141,11 @@
               <p class="lead">
               <div class="btn-group btn-group-toggle" data-toggle="buttons">
                 <label class="btn btn-warning ">
-                  <input type="radio" name="options8" id="option1" autocomplete="off" value="1"> <span style='font-size:20px;'>&#128578;</span></label>
+                  <input type="radio" name="options8" id="option1" autocomplete="off" value="1" required> <span style='font-size:20px;'>&#128578;</span></label>
                 <label class="btn btn-warning">
-                  <input type="radio" name="options8" id="option2" autocomplete="off" value="2"> <span style='font-size:20px;'>&#128528;</span></label>
+                  <input type="radio" name="options8" id="option2" autocomplete="off" value="2" required> <span style='font-size:20px;'>&#128528;</span></label>
                 <label class="btn btn-warning">
-                  <input type="radio" name="options8" id="option3" autocomplete="off" value="0"> <span style='font-size:20px;'>&#128577;</span></label>
+                  <input type="radio" name="options8" id="option3" autocomplete="off" value="0" required> <span style='font-size:20px;'>&#128577;</span></label>
               </div></p>
             </tr>
             <tr>
@@ -150,11 +153,11 @@
               <p class="lead">
               <div class="btn-group btn-group-toggle" data-toggle="buttons">
                 <label class="btn btn-warning ">
-                  <input type="radio" name="options9" id="option1" autocomplete="off" value="1"> <span style='font-size:20px;'>&#128578;</span></label>
+                  <input type="radio" name="options9" id="option1" autocomplete="off" value="1" required> <span style='font-size:20px;'>&#128578;</span></label>
                 <label class="btn btn-warning">
-                  <input type="radio" name="options9" id="option2" autocomplete="off" value="2"> <span style='font-size:20px;'>&#128528;</span></label>
+                  <input type="radio" name="options9" id="option2" autocomplete="off" value="2" required> <span style='font-size:20px;'>&#128528;</span></label>
                 <label class="btn btn-warning">
-                  <input type="radio" name="options9" id="option3" autocomplete="off" value="0"> <span style='font-size:20px;'>&#128577;</span></label>
+                  <input type="radio" name="options9" id="option3" autocomplete="off" value="0" required> <span style='font-size:20px;'>&#128577;</span></label>
               </div>
               </p>
             </tr>

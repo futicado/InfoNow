@@ -1,0 +1,11 @@
+Após clonar o repositório 
+composer install
+
+
+Erro 500 após baixar projeto do laravel 
+
+
+comandos para resolver- dentro da pasta do projeto com o cmd 
+
+copy .env.example .env
+php artisan key:generate

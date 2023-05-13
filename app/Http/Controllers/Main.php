@@ -33,7 +33,9 @@ class Main extends Controller
     }
     public function cadastroitem()
     {
-        return view('Cadastroitem');
+        $list = DB::select('select distinct(nome) from tbitens');
+
+        return view('cadastroitem', ['list' => $list]);
     }
     public function sair(Request $request)
     {
@@ -69,7 +71,7 @@ class Main extends Controller
     {
 
 
-        // realizar o cadastro no banco de dados
+          // realizar o cadastro no banco de dados - Dados obtidos do formulário
           $nome = $request->input('nomeitem');
           $op[0]= $request->input('options0');
           $op[1]= $request->input('options1');
@@ -81,13 +83,12 @@ class Main extends Controller
           $op[7]= $request->input('options7');
           $op[8]= $request->input('options8');
           $op[9]= $request->input('options9');
+          $usercad= session()->get('email');
 
-         echo $usercad= session()->get('email');
+          //status é a conformidade do item baseado nas respostas do usuário
+          //1 conformidade
+          //0 inconformidade
 
-          $lista = DB::select("select distinct(Pkcodu) from tbusuario where emailu=?",['?'],[$usercad]);
-         ;;$usercad = $lista[0]->emailu;
-
-        printf($lista);
           for($i=0; $i<10; $i++){
             if($op[$i]==0){
                 $acum=0;
@@ -100,9 +101,19 @@ class Main extends Controller
             $status=1;
           }
 
-       // $dados =DB::insert('insert into users (id, name) values (?,?,?, ?)', [1, 'Dayle'])
-      // fazer a inserção no banco de dados
-       //  return redirect()->route('dashboard', ['dasdos' => $dados]);
+
+          $lista = DB::select('select Pkcodu from tbusuario where emailu = ?', [$usercad]);
+          $user = $lista[0]->Pkcodu;
+
+          DB::table('tbitens')->insert([
+
+            'nome' => $nome,'trinca' => $op[0],'pintura' => $op[1],'corrosao' => $op[2],'cabos' => $op[3],
+            'travas' => $op[4], 'oleo' => $op[5],'vazamento' => $op[6],'pressoleo' => $op[7],'rotacao' => $op[8],'partesoltas' => $op[9],
+            'usercad' => $user, 'conformidade' => $status]);
+
+
+        //fazer a inserção no banco de dados
+        return redirect()->route('dashboard');
 
     }
 

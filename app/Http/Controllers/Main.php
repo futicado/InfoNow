@@ -31,9 +31,9 @@ class Main extends Controller
     {
         return view('cadastro');
     }
-    public function cadastrolivro()
+    public function cadastroitem()
     {
-        return view('CadastroLivros');
+        return view('Cadastroitem');
     }
     public function sair(Request $request)
     {
@@ -65,7 +65,7 @@ class Main extends Controller
 
 
 
-    public function cadastrolivrosubmissao(Request $request)
+    public function cadastrosubmissao(Request $request)
     {
 
 
@@ -82,9 +82,12 @@ class Main extends Controller
           $op[8]= $request->input('options8');
           $op[9]= $request->input('options9');
 
-         $usercad= session()->get('email');
+         echo $usercad= session()->get('email');
 
+          $lista = DB::select("select distinct(Pkcodu) from tbusuario where emailu=?",['?'],[$usercad]);
+         ;;$usercad = $lista[0]->emailu;
 
+        printf($lista);
           for($i=0; $i<10; $i++){
             if($op[$i]==0){
                 $acum=0;
@@ -97,7 +100,7 @@ class Main extends Controller
             $status=1;
           }
 
-       // $dados =DB::insert('insert into users (id, name) values (?, ?)', [1, 'Dayle'])
+       // $dados =DB::insert('insert into users (id, name) values (?,?,?, ?)', [1, 'Dayle'])
       // fazer a inserção no banco de dados
        //  return redirect()->route('dashboard', ['dasdos' => $dados]);
 
@@ -171,11 +174,9 @@ class Main extends Controller
         $a = 0;
 
         foreach ($listau as $dado) {
-            if ($dado->emailu == $email) {
-                if ($dado->senhau == $senha) {
+            if ($dado->emailu == $email and  $dado->senhau == $senha) {
                     $a = 1;
                 }
-            }
         }
 
         if ($a == 1) {

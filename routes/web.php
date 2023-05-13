@@ -19,22 +19,16 @@ use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 
 Route::get('/', 'Main@login')->name('login');
 Route::post('/submissao','Main@submissao')->name('submissao');
-
 Route::get('/dashboard', 'Main@dashboard')->name('dashboard');
-
-
-Route::get('/cadastrolivro', 'Main@cadastrolivro')->name('cadastrolivro');
-Route::post('/cadastrolivrosubmissao', 'Main@cadastrolivrosubmissao')->name('cadastrolivrosubmissao');
-
-Route::post('/email', 'Main@email')->name('email');
-
+Route::get('/cadastroitem', 'Main@cadastroitem')->name('cadastroitem');
+Route::post('/cadastrolivrosubmissao', 'Main@cadastrosubmissao')->name('cadastrosubmissao');
 Route::get('/cadastro','Main@cadastro')->name('cadastro');
 Route::post('/verificacadastro','Main@verificacadastro')->name('verificacadastro');
-
 Route::get('/sair','Main@sair')->name('sair');
-
-Route::get('/deletar/{id}','Main@excluir')->name('deletar');
-
-Route::get('/Dashboardl','Main@dashboardl')->name('dashboardl');
-
 Route::get('/sobre','Main@sobre')->name('sobre');
+
+//Route::post('/email', 'Main@email')->name('email');
+//Route::get('/deletar/{id}','Main@excluir')->name('deletar');
+//Route::get('/Dashboardl','Main@dashboardl')->name('dashboardl');
+
+

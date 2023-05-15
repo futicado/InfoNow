@@ -31,6 +31,11 @@ class Main extends Controller
     {
         return view('cadastro');
     }
+    public function relatorios()
+    {
+        
+        return view('relatorios');
+    }
     public function cadastroitem()
     {
         $list = DB::select('select distinct(nome) from tbitens');

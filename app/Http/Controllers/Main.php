@@ -33,7 +33,7 @@ class Main extends Controller
     }
     public function relatorios()
     {
-        
+
         return view('relatorios');
     }
     public function cadastroitem()
@@ -105,8 +105,7 @@ class Main extends Controller
           }else{
             $status=1;
           }
-
-
+          
           $lista = DB::select('select Pkcodu from tbusuario where emailu = ?', [$usercad]);
           $user = $lista[0]->Pkcodu;
 

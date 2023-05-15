@@ -95,15 +95,29 @@
                         "idade" => 28
                     );
 
+
+
+                    $filename = 'c:\\Temp\\';
+
+                    if (file_exists($filename)) {
+
+                    echo "O arquivo $filename existe";
                     $arquivo = 'data.json';
                     $json = json_encode($data);
                     $file = fopen('c:\\Temp\\'. '/' . $arquivo,'w');
                     fwrite($file, $json);
                     fclose($file);
 
+                    } else {
+                        $output = shell_exec('mkdir C:\\Temp\\');
+                        echo "O arquivo $filename não existe";
+                    }
+
+
                    // $command = escapeshellcmd('python C:\\Temp\\scriptPython.py');
-                /// r = shell_exec(escapeshellcmd("python teste.py '$knowns' 2>&1"));
-                    $output = shell_exec('python C:\Temp\scriptPython.py');
+                   /// r = shell_exec(escapeshellcmd("python teste.py '$knowns' 2>&1"));
+                    $a="sdadsadas";
+                    $output = shell_exec('python teste.py'.$a);
 
                     echo($output);
 
@@ -112,6 +126,7 @@
                     //echo exec('whoami');
 
                 ?>
+
 
                     <div class="btn-toolbar mb-2 mb-md-0">
                         <div class="btn-group mr-2">

@@ -97,59 +97,56 @@
                     class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
                     <h1 class="h2">Relatórios</h1>
 
+
                     <?php
+                    /* //$nome = $request->input('nomeitem');
+                    $nome='Novo item de cadastro';
+                    $lista = DB::select('select codigonome from tbnome where upper(nome) = ?', [$nome]);
+                    $nomeInt = $lista[0]->codigonome;
+
+                    $data=DB::select('select `codigo`, `nome`, `trinca`, `pintura`, `corrosao`, `cabos`, `travas`, `oleo`, `vazamento`, `pressoleo`, `rotacao`, `partesoltas`,
+                    `usercad`, `conformidade` from tbitens where nome = ?', [$nomeInt]);
+
+                    // criando os arquivos Json para processamento no Python.
+                    $arquivo = 'data.json';  // dados para treino do modelo
+                    $json = json_encode($data);
+                    $file = fopen('C:\\Temp\\' . '/' . $arquivo,'w+');
+                    fwrite($file, $json);
+                    fclose($file);
 
 
-                        $data =[[
-
-                            'trinca' => 0,
-                            'oleo' => 0,
-                            'trinca' => 0,
-                            'pintura' => 1,
-                            'corrosao' => 2,
-                            'cabos' => 0,
-                            'travas' => 1,
-                            'oleo' => 0,
-                            'vazamento' =>0,
-                            'pressoleo' => 0,
-                            'rotacao' => 0,
-                            'partesoltas' => 1,
-                            'conformidade' => 0]];
+                    $entrada=DB::select('select `codigo`, `nome`, `trinca`, `pintura`, `corrosao`, `cabos`, `travas`, `oleo`, `vazamento`, `pressoleo`, `rotacao`, `partesoltas`,
+                    `usercad`, `conformidade` from tbitens where `data` BETWEEN (SELECT max(`data`) from tbitens WHERE `nome` = ?) and CURRENT_DATE() and `nome` = ?', [$nomeInt, $nomeInt]);
+                    //pegando o último registro que será usado como dado de entrada na previsão.
+                    //SELECT * FROM `tbitens` WHERE `data` BETWEEN  (SELECT max(`data`) from tbitens WHERE `nome` = 13)  and CURRENT_DATE() and `nome`=13;
 
 
-                            $arquivo = 'data.json';
-
-                            $json = json_encode($data);
-
-                            $file = fopen('C:\\Temp\\' . '/' . $arquivo,'w+');
-
-                            fwrite($file, $json);
-                            fclose($file);
-                            $r= shell_exec("python.exe C:\\Temp\\scriptPython.py");
-                            echo $r;
+                    $dt = 'entrada.json';  // dados de testes para a previsão.
+                    $json = json_encode($entrada);
+                    $file = fopen('C:\\Temp\\' . '/' . $dt,'w+');
+                    fwrite($file, $json);
+                    fclose($file);
 
 
-
-                        ?>
-                        sdasasas
-
+                    $r= shell_exec("python.exe C:\\Temp\\scriptPython.py");
+*/
+                    ?>
                     <div class="btn-toolbar mb-2 mb-md-0">
                         <div class="btn-group mr-2">
-
                         </div>
 
 
-                    </div>ff
+                    </div>
                 </div>
-                   <form>
-                     <div class="form-row align-items-center">
+
+                   <form  class= "form-control" method="post" action="{{ Route('relatorio') }}">
+
                         <div class="col-auto my-1">
-                            <label class="mr-sm-2" for="inlineFormCustomSelect">Preference</label>
+                            <label class="mr-sm-2" for="inlineFormCustomSelect">Itens para geração do relatório </label>
                             <select class="custom-select mr-sm-2" id="inlineFormCustomSelect">
-                            <option selected>Choose...</option>
-                            <option value="1">One</option>
-                            <option value="2">Two</option>
-                            <option value="3">Three</option>
+                            <!-- enviar as informações para o botão -->
+                            <option value="2" name="item">Two</option>
+                            <option value="3" name="item">Three</option>
                             </select>
                         </div>
                         <div class="col-auto my-1">
@@ -163,14 +160,11 @@
                         </div>
                         </div>
                         <div style="padding-left:20%">
-
-                            dsadsadsadasdasdasdsa
                         </div>
                   </form>
 
 
                     </div>
-                    dsadadas
                 </div>
         </div>
 

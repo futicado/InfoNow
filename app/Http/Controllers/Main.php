@@ -33,8 +33,8 @@ class Main extends Controller
     }
     public function relatorios()
     {
-
-        return view('relatorios');
+        $list = DB::select('select distinct(n.nome) from tbitens as t INNER join tbnome as n on t.nome= n.codigonome;');
+        return view('relatorios',['list',$list]);
     }
     public function cadastroitem()
     {
@@ -119,13 +119,14 @@ class Main extends Controller
 
           $lista = DB::select('select codigonome from tbnome where upper(nome) = ?', [$nome]);
           $nomeInt = $lista[0]->codigonome;
-          //var_dump($lista);
 
+
+          $data = date('Y-m-d');
           DB::table('tbitens')->insert([
 
             'nome' => $nomeInt,'trinca' => $op[0],'pintura' => $op[1],'corrosao' => $op[2],'cabos' => $op[3],
             'travas' => $op[4], 'oleo' => $op[5],'vazamento' => $op[6],'pressoleo' => $op[7],'rotacao' => $op[8],'partesoltas' => $op[9],
-            'usercad' => $user, 'conformidade' => $status]);
+            'usercad' => $user, 'conformidade' => $status, 'data' => $data]);
 
 
         //fazer a inserção no banco de dados
@@ -134,8 +135,39 @@ class Main extends Controller
     }
 
 
+    public function relatorio(){
 
-    
+                //$nome = $request->input('nomeitem');
+                $nome='Novo item de cadastro';
+                $lista = DB::select('select codigonome from tbnome where upper(nome) = ?', [$nome]);
+                $nomeInt = $lista[0]->codigonome;
+
+                $data=DB::select('select `codigo`, `nome`, `trinca`, `pintura`, `corrosao`, `cabos`, `travas`, `oleo`, `vazamento`, `pressoleo`, `rotacao`, `partesoltas`,
+                `usercad`, `conformidade` from tbitens where nome = ?', [$nomeInt]);
+
+                // criando os arquivos Json para processamento no Python.
+                $arquivo = 'data.json';  // dados para treino do modelo
+                $json = json_encode($data);
+                $file = fopen('C:\\Temp\\' . '/' . $arquivo,'w+');
+                fwrite($file, $json);
+                fclose($file);
+
+
+                $entrada=DB::select('select `codigo`, `nome`, `trinca`, `pintura`, `corrosao`, `cabos`, `travas`, `oleo`, `vazamento`, `pressoleo`, `rotacao`, `partesoltas`,
+                `usercad`, `conformidade` from tbitens where `data` BETWEEN (SELECT max(`data`) from tbitens WHERE `nome` = ?) and CURRENT_DATE() and `nome` = ?', [$nomeInt, $nomeInt]);
+                //pegando o último registro que será usado como dado de entrada na previsão.
+                //SELECT * FROM `tbitens` WHERE `data` BETWEEN  (SELECT max(`data`) from tbitens WHERE `nome` = 13)  and CURRENT_DATE() and `nome`=13;
+                $dt = 'entrada.json';  // dados de testes para a previsão.
+                $json = json_encode($entrada);
+                $file = fopen('C:\\Temp\\' . '/' . $dt,'w+');
+                fwrite($file, $json);
+                fclose($file);
+                 $r= shell_exec("python.exe C:\\Temp\\scriptPython.py");
+
+    }
+
+
+
     public function submissao(Request $request)
     {
         // verificar problema de voltar a página.
@@ -188,6 +220,10 @@ class Main extends Controller
             return redirect()->route('cadastro'); // enviando os dados para o view do Dashboard.
         }
     }
+
+
+
+
 
 
     public function verificacadastro(Request $request)

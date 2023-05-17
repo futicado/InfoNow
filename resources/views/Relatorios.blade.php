@@ -54,6 +54,15 @@
                                 Aplicar Checklist
                             </a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('relatorios') }}">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-file-earmark-binary" viewBox="0 0 16 16">
+                                    <path d="M7.05 11.885c0 1.415-.548 2.206-1.524 2.206C4.548 14.09 4 13.3 4 11.885c0-1.412.548-2.203 1.526-2.203.976 0 1.524.79 1.524 2.203zm-1.524-1.612c-.542 0-.832.563-.832 1.612 0 .088.003.173.006.252l1.559-1.143c-.126-.474-.375-.72-.733-.72zm-.732 2.508c.126.472.372.718.732.718.54 0 .83-.563.83-1.614 0-.085-.003-.17-.006-.25l-1.556 1.146zm6.061.624V14h-3v-.595h1.181V10.5h-.05l-1.136.747v-.688l1.19-.786h.69v3.633h1.125z"/>
+                                    <path d="M14 14V4.5L9.5 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2zM9.5 3A1.5 1.5 0 0 0 11 4.5h2V14a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h5.5v2z"/>
+                                  </svg>
+                                Relatórios
+                            </a>
+                        </li>
 
 
 
@@ -87,58 +96,81 @@
                 <div
                     class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
                     <h1 class="h2">Relatórios</h1>
+
                     <?php
 
 
-                    $data = array(
-                        "nome" => "Yuri",
-                        "idade" => 28
-                    );
+                        $data =[[
+
+                            'trinca' => 0,
+                            'oleo' => 0,
+                            'trinca' => 0,
+                            'pintura' => 1,
+                            'corrosao' => 2,
+                            'cabos' => 0,
+                            'travas' => 1,
+                            'oleo' => 0,
+                            'vazamento' =>0,
+                            'pressoleo' => 0,
+                            'rotacao' => 0,
+                            'partesoltas' => 1,
+                            'conformidade' => 0]];
+
+
+                            $arquivo = 'data.json';
+
+                            $json = json_encode($data);
+
+                            $file = fopen('C:\\Temp\\' . '/' . $arquivo,'w+');
+
+                            fwrite($file, $json);
+                            fclose($file);
+                            $r= shell_exec("python.exe C:\\Temp\\scriptPython.py");
+                            echo $r;
 
 
 
-                    $filename = 'c:\\Temp\\';
-
-                    if (file_exists($filename)) {
-
-                    echo "O arquivo $filename existe";
-                    $arquivo = 'data.json';
-                    $json = json_encode($data);
-                    $file = fopen('c:\\Temp\\'. '/' . $arquivo,'w');
-                    fwrite($file, $json);
-                    fclose($file);
-
-                    } else {
-                        $output = shell_exec('mkdir C:\\Temp\\');
-                        echo "O arquivo $filename não existe";
-                    }
-
-
-                   // $command = escapeshellcmd('python C:\\Temp\\scriptPython.py');
-                   /// r = shell_exec(escapeshellcmd("python teste.py '$knowns' 2>&1"));
-                    $a="sdadsadas";
-                    $output = shell_exec('python teste.py'.$a);
-
-                    echo($output);
-
-
-
-                    //echo exec('whoami');
-
-                ?>
-
+                        ?>
+                        sdasasas
 
                     <div class="btn-toolbar mb-2 mb-md-0">
                         <div class="btn-group mr-2">
+
                         </div>
 
-                    </div>
+
+                    </div>ff
                 </div>
+                   <form>
+                     <div class="form-row align-items-center">
+                        <div class="col-auto my-1">
+                            <label class="mr-sm-2" for="inlineFormCustomSelect">Preference</label>
+                            <select class="custom-select mr-sm-2" id="inlineFormCustomSelect">
+                            <option selected>Choose...</option>
+                            <option value="1">One</option>
+                            <option value="2">Two</option>
+                            <option value="3">Three</option>
+                            </select>
+                        </div>
+                        <div class="col-auto my-1">
+                            <div class="custom-control custom-checkbox mr-sm-2">
+                            <input type="checkbox" class="custom-control-input" id="customControlAutosizing">
+                            <label class="custom-control-label" for="customControlAutosizing">Remember my preference</label>
+                            </div>
+                        </div>
+                        <div class="col-auto my-1">
+                            <button type="submit" class="btn btn-primary">Submit</button>
+                        </div>
+                        </div>
+                        <div style="padding-left:20%">
 
-
+                            dsadsadsadasdasdasdsa
+                        </div>
+                  </form>
 
 
                     </div>
+                    dsadadas
                 </div>
         </div>
 

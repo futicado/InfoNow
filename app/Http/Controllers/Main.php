@@ -38,7 +38,7 @@ class Main extends Controller
     }
     public function cadastroitem()
     {
-        $list = DB::select('select distinct(nome) from tbitens');
+        $list = DB::select('select distinct(n.nome) from tbitens as t INNER join tbnome as n on t.nome= n.codigonome;');
 
         return view('cadastroitem', ['list' => $list]);
     }
@@ -105,55 +105,37 @@ class Main extends Controller
           }else{
             $status=1;
           }
-          
+
           $lista = DB::select('select Pkcodu from tbusuario where emailu = ?', [$usercad]);
           $user = $lista[0]->Pkcodu;
 
+          try {
+              $inserir= DB::insert('insert into tbnome (nome) values (?)', [$nome]); // inserindo o nome e uma tabela separada
+              $nome=strtoupper($nome);
+
+          } catch (\Throwable $th) {
+
+          }
+
+          $lista = DB::select('select codigonome from tbnome where upper(nome) = ?', [$nome]);
+          $nomeInt = $lista[0]->codigonome;
+          //var_dump($lista);
+
           DB::table('tbitens')->insert([
 
-            'nome' => $nome,'trinca' => $op[0],'pintura' => $op[1],'corrosao' => $op[2],'cabos' => $op[3],
+            'nome' => $nomeInt,'trinca' => $op[0],'pintura' => $op[1],'corrosao' => $op[2],'cabos' => $op[3],
             'travas' => $op[4], 'oleo' => $op[5],'vazamento' => $op[6],'pressoleo' => $op[7],'rotacao' => $op[8],'partesoltas' => $op[9],
             'usercad' => $user, 'conformidade' => $status]);
 
 
         //fazer a inserção no banco de dados
-        return redirect()->route('dashboard');
+        return redirect()->route('dashboard') ->with('alert','CheckList aplicado como sucesso.');
 
     }
 
 
 
-    public function email(Request $request)
-    {
-        $nome = $request->nome;
-        $descricao =  $request->descricao;
-        $mensagem = $request->mensagem;
-        $pkcodliv = $request->pkcodliv;
-
-        $email = $request->session()->get('email');
-
-        $lista = DB::select("select Emailliv from tblivro where pkcodliv=$pkcodliv");
-
-        $a = $lista[0]->Emailliv;
-
-        $GLOBALS["j"] = $a;
-
-        Mail::send('mail.welcomemail', ['name' => $nome, 'descricao' => $descricao, 'email' => $email,  'mensagem' => $mensagem], function ($m) {
-
-            $m->from('plataformadelivros@gmail.com', 'Plataforma de Livros');
-            $m->to($GLOBALS['j']);
-            $m->subject('Alerta - Plataforma de Livros');
-        });
-
-        echo "<script>alert('E-mail enviado com sucesso !!!');</script>";
-
-        // return redirect()->action('Main@dashboard')->with('mensagem','E-mail enviado com sucesso!' );
-       // $lista = DB::select('select * from tblivro');
-
-        // buscar no banco as informações e comparar.
-        return redirect()->route('dashboard', ['lista' => $lista]);
-    }
-
+    
     public function submissao(Request $request)
     {
         // verificar problema de voltar a página.

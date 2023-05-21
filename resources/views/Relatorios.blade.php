@@ -116,7 +116,7 @@
                     <br>
                     </div>
                     <div class="col">
-                        <button type="submit" class="btn btn-primary">Submit</button>
+                        <button type="submit" class="btn btn-primary">Enviar</button>
                     </div>
                     <br>
 

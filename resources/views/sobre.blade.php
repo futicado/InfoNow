@@ -19,10 +19,8 @@
                 <br>
                     <p >
                     <div style=" color:black; padding-left:2%; text-align: justify;width:600px">
-                    A plataforma InfoNow foi criada para solucionar o problema da manutenções em máquinas  ocorre em diversas empresas que necessitam em algum momento 
-      realizar a manutenção de suas máquinas. sendo assim ocorreria essa manutenção no melhor momento para não prejudicar a produção. 
-      Com o InfoNow será possível verificar qual o tempo de vida de cada equipamento envolvido no processo e assim criar uma forma
-      de programar horários e dias especificos.  
+                        Este trabalho tem como proposta criar uma ferramenta web para trabalhar com os dados de inspeções de máquinas e, com o uso de machine learning, avaliar e descrever o estado dos itens que estão sendo avaliados. Diante de tais dados, busca-se, quando possível, saber de antemão quando um destes itens poderá vir a falhar, com base nas informações obtidas na análise dos técnicos.
+
                         </div>
                         </p>
                  </div>

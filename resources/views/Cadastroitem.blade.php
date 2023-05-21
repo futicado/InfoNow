@@ -28,7 +28,7 @@
                     <table class="table">
             <tbody>
               <tr>
-                
+
                   <div class="col-md-15 mb-3">
                             <label for="firstName">Nome do Item</label>
                             <input class="form-control" id="firstName" name="nomeitem" list="textos" required />

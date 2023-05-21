@@ -97,74 +97,111 @@
                     class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
                     <h1 class="h2">Relatórios</h1>
 
-
-                    <?php
-                    /* //$nome = $request->input('nomeitem');
-                    $nome='Novo item de cadastro';
-                    $lista = DB::select('select codigonome from tbnome where upper(nome) = ?', [$nome]);
-                    $nomeInt = $lista[0]->codigonome;
-
-                    $data=DB::select('select `codigo`, `nome`, `trinca`, `pintura`, `corrosao`, `cabos`, `travas`, `oleo`, `vazamento`, `pressoleo`, `rotacao`, `partesoltas`,
-                    `usercad`, `conformidade` from tbitens where nome = ?', [$nomeInt]);
-
-                    // criando os arquivos Json para processamento no Python.
-                    $arquivo = 'data.json';  // dados para treino do modelo
-                    $json = json_encode($data);
-                    $file = fopen('C:\\Temp\\' . '/' . $arquivo,'w+');
-                    fwrite($file, $json);
-                    fclose($file);
-
-
-                    $entrada=DB::select('select `codigo`, `nome`, `trinca`, `pintura`, `corrosao`, `cabos`, `travas`, `oleo`, `vazamento`, `pressoleo`, `rotacao`, `partesoltas`,
-                    `usercad`, `conformidade` from tbitens where `data` BETWEEN (SELECT max(`data`) from tbitens WHERE `nome` = ?) and CURRENT_DATE() and `nome` = ?', [$nomeInt, $nomeInt]);
-                    //pegando o último registro que será usado como dado de entrada na previsão.
-                    //SELECT * FROM `tbitens` WHERE `data` BETWEEN  (SELECT max(`data`) from tbitens WHERE `nome` = 13)  and CURRENT_DATE() and `nome`=13;
-
-
-                    $dt = 'entrada.json';  // dados de testes para a previsão.
-                    $json = json_encode($entrada);
-                    $file = fopen('C:\\Temp\\' . '/' . $dt,'w+');
-                    fwrite($file, $json);
-                    fclose($file);
-
-
-                    $r= shell_exec("python.exe C:\\Temp\\scriptPython.py");
-*/
-                    ?>
                     <div class="btn-toolbar mb-2 mb-md-0">
                         <div class="btn-group mr-2">
                         </div>
-
-
                     </div>
                 </div>
-
-                   <form  class= "form-control" method="post" action="{{ Route('relatorio') }}">
-
-                        <div class="col-auto my-1">
-                            <label class="mr-sm-2" for="inlineFormCustomSelect">Itens para geração do relatório </label>
-                            <select class="custom-select mr-sm-2" id="inlineFormCustomSelect">
-                            <!-- enviar as informações para o botão -->
-                            <option value="2" name="item">Two</option>
-                            <option value="3" name="item">Three</option>
-                            </select>
-                        </div>
-                        <div class="col-auto my-1">
-                            <div class="custom-control custom-checkbox mr-sm-2">
-                            <input type="checkbox" class="custom-control-input" id="customControlAutosizing">
-                            <label class="custom-control-label" for="customControlAutosizing">Remember my preference</label>
-                            </div>
-                        </div>
-                        <div class="col-auto my-1">
-                            <button type="submit" class="btn btn-primary">Submit</button>
-                        </div>
-                        </div>
-                        <div style="padding-left:20%">
-                        </div>
-                  </form>
-
-
+                <div class="row g-3">
+                  <form  method="POST" action="{{route('relatorio')}}">
+                    @csrf
+                    <div class="col">
+                     <label>Selecione um item para a predição: </label>
+                    <br>
+                    <select name="nomeitem" class="form-control">
+                    @foreach ($list as $a )
+                        <option value='{{$a->nome}}' >{{$a->nome}}</option>
+                    @endforeach
+                    </select>
+                    <br>
                     </div>
+                    <div class="col">
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </div>
+                    <br>
+
+                  </div>
+                      <?php if(@$status == 1){?>
+
+
+                        <h1 class="center">Resultado</h1>
+
+
+
+                        <div  style="padding-top:3%"class="col-auto my-1">
+                            @if ($result == 1)
+
+                            <div class="alert alert-success" role="alert">
+
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                  </button>
+                                <h4 class="alert-heading">Status - Conformidade</h4>
+                                <p><B>Realizado a predição com sucesso:</B> A Manutenção do item - <B>{{$nome}}</B> está em conformidade.</p>
+                                <hr style="height:2px;">
+                                <p class="mb-0">Continue realizando checklists periodicamente assim mantendo os equipamentos funcionando.</p>
+
+                              </div>
+                            @endif
+
+                            @if ($result == 0)
+
+                            <div class="alert alert-danger" role="alert">
+
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                  </button>
+                                <h4 class="alert-heading">Status - Inconformidade</h4>
+                                <p><B>Realizado a predição com sucesso:</B> A Manutenção do item - <B>{{$nome}}</B> não está em conformidade.<br>
+                                    <B>Sugestão:</B> Realize a manutenção imediatamente  evitando a parada inesperada</p>
+
+                                <hr style="height:2px;">
+                                <p class="mb-0">Continue realizando checklists periodicamente assim evitando que os equipamentos parem de funcionar.</p>
+                              </div>
+                            @endif
+
+                        <div class="card-header">
+                          </div>
+                          <div class="card-body">
+                            {{-- <footer class="blockquote-footer">Someone famous in <cite title="Source Title">Source Title</cite></footer> --}}
+                            <blockquote class="blockquote mb-0">
+                              <p> A "feature_importances" identifica quais variáveis(Características) têm um impacto significativo no resultado final. <br>
+                                Essas características-chave podem ser exploradas para obter
+                                uma compreensão do resultado predito.</p>
+                                <br>
+                                <var>
+                                   <pre> {{@$info}}</pre>
+                                </var>
+                                <br>
+                                <p>Checklists realizados sobre item avaliado: {{$cont}}</p><br>
+
+                                     <p id="demo">
+                                     <button onclick="myFunction()">Mais informações clique aqui</button>
+                                     </p>
+
+                                    <script>
+                                    function myFunction() {
+                                    document.getElementById("demo").innerHTML = "<br><figure class='figure'><figcaption style='font-size:15px;'class='figure-caption'><b>Árvore de decisão</b></figcaption><img src='{{asset('img/arvore.png')}}' height='375px' width='475px' style='float:left' class='figure-img img-fluid rounded' alt=''></figure>";
+                                    }
+                                    </script>
+                            </blockquote>
+                          </div>
+                        </div>
+                        <?php }else {
+
+                        }?>
+
+
+
+                     </div>
+                     </div>
+                    <div style="padding-left:20%">
+                    </div>
+                  </form>
+                    </div>
+
+
+
                 </div>
         </div>
 

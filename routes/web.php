@@ -27,7 +27,7 @@ Route::post('/verificacadastro','Main@verificacadastro')->name('verificacadastro
 Route::get('/sair','Main@sair')->name('sair');
 Route::get('/sobre','Main@sobre')->name('sobre');
 Route::get('/relatorios','Main@relatorios')->name('relatorios');
-Route::get('/relatorio','Main@relatorio')->name('relatorio');
+Route::post('/relatorio','Main@relatorio')->name('relatorio');
 
 
 //Route::post('/email', 'Main@email')->name('email');

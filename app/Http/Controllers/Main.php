@@ -34,7 +34,7 @@ class Main extends Controller
     public function relatorios()
     {
         $list = DB::select('select distinct(n.nome) from tbitens as t INNER join tbnome as n on t.nome= n.codigonome;');
-        return view('relatorios',['list',$list]);
+        return view('relatorios',['list' => $list ]);
     }
     public function cadastroitem()
     {
@@ -66,7 +66,7 @@ class Main extends Controller
             //$lista = DB::select('select * from tblivro');
             // buscar no banco as informações e comparar.
             //return view('Dashboardl', ['lista' => $lista]);
-            return view('Dashboardl');
+            return view('Dashboard');
         }
     }
 
@@ -135,12 +135,18 @@ class Main extends Controller
     }
 
 
-    public function relatorio(){
 
-                //$nome = $request->input('nomeitem');
-                $nome='Novo item de cadastro';
+
+
+    public function relatorio(Request $request){
+
+                $nome = strtoupper($request->input('nomeitem'));
                 $lista = DB::select('select codigonome from tbnome where upper(nome) = ?', [$nome]);
                 $nomeInt = $lista[0]->codigonome;
+
+                // var_dump($request::post());
+
+
 
                 $data=DB::select('select `codigo`, `nome`, `trinca`, `pintura`, `corrosao`, `cabos`, `travas`, `oleo`, `vazamento`, `pressoleo`, `rotacao`, `partesoltas`,
                 `usercad`, `conformidade` from tbitens where nome = ?', [$nomeInt]);
@@ -152,9 +158,8 @@ class Main extends Controller
                 fwrite($file, $json);
                 fclose($file);
 
-
                 $entrada=DB::select('select `codigo`, `nome`, `trinca`, `pintura`, `corrosao`, `cabos`, `travas`, `oleo`, `vazamento`, `pressoleo`, `rotacao`, `partesoltas`,
-                `usercad`, `conformidade` from tbitens where `data` BETWEEN (SELECT max(`data`) from tbitens WHERE `nome` = ?) and CURRENT_DATE() and `nome` = ?', [$nomeInt, $nomeInt]);
+                `usercad`, `conformidade` from tbitens where `data` BETWEEN (SELECT max(`data`) from tbitens WHERE `nome` = ?) and CURRENT_DATE() and `nome` = ?  ORDER BY codigo DESC LIMIT 1;', [$nomeInt, $nomeInt]);
                 //pegando o último registro que será usado como dado de entrada na previsão.
                 //SELECT * FROM `tbitens` WHERE `data` BETWEEN  (SELECT max(`data`) from tbitens WHERE `nome` = 13)  and CURRENT_DATE() and `nome`=13;
                 $dt = 'entrada.json';  // dados de testes para a previsão.
@@ -162,9 +167,43 @@ class Main extends Controller
                 $file = fopen('C:\\Temp\\' . '/' . $dt,'w+');
                 fwrite($file, $json);
                 fclose($file);
-                 $r= shell_exec("python.exe C:\\Temp\\scriptPython.py");
+                //Chamado script de treino de criando o dump do modelo treinado para as futuras consultas
+
+                $r= shell_exec("python.exe C:\\xampp\\htdocs\\InfoNow\\scripts\\scriptPython.py");
+                $r=intval($r,10);
+
+                if($r==1){
+                      $result=1;
+                }else{
+                      $result=0;
+                }
+
+                $contagem=DB::select('select count(*) as contagem from tbitens where nome = ?', [$nomeInt]);
+                $cont = $contagem[0]->contagem;
+
+                 $filename = 'C:\\Temp\\modelo.h5';
+
+                if (is_file($filename)== true) {
+                   $r= shell_exec("python.exe C:\\xampp\\htdocs\\InfoNow\\scripts\\scriptspredicao_load.py");
+                   $info= shell_exec("python.exe C:\\xampp\\htdocs\\InfoNow\\scripts\Informacao.py");
+                } else {
+                   $r= shell_exec("python.exe C:\\xampp\\htdocs\\InfoNow\\scripts\\scriptPython.py");
+                   $info= shell_exec("python.exe C:\\xampp\\htdocs\\InfoNow\\scripts\Informacao.py");
+                }
+
+                //status é a conformidade do item baseado nas respostas do usuário
+                //1 conformidade
+                //0 inconformidade
+
+
+                $list = DB::select('select distinct(n.nome) from tbitens as t INNER join tbnome as n on t.nome= n.codigonome;');
+                $status=1;
+                return view('relatorios',['info'=>$info,'nome' => $nome, 'result' => $result,'list' => $list,'status' => $status,'cont'=>$cont]);
+        //   // echo "<pre>";
+        // // echo $info;
 
     }
+
 
 
 

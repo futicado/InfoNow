@@ -1,4 +1,5 @@
 Após clonar o repositório 
+composer update
 composer install
 
 

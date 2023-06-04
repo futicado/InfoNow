@@ -1,12 +1,17 @@
-Após clonar o repositório 
+Após clonar o repositório
 composer update
 composer install
 
 
-Erro 500 após baixar projeto do laravel 
+Erro 500 após baixar projeto do laravel
 
 
-comandos para resolver- dentro da pasta do projeto com o cmd 
+comandos para resolver- dentro da pasta do projeto com o cmd
 
 copy .env.example .env
 php artisan key:generate
+
+
+npm install --save jquery
+npm install @popperjs/core --save
+npm install popper.js --save

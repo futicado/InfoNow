@@ -15,3 +15,11 @@ php artisan key:generate
 npm install --save jquery
 npm install @popperjs/core --save
 npm install popper.js --save
+
+Python
+
+Pip install json
+pip install pandas
+pip install -U scikit-learn
+pip install matplotlib
+pip install joblib

@@ -10,8 +10,6 @@
         }
     </style>
     <br>
-
-
     @if ($errors->any())
             <center>
                 @foreach ($errors->all() as $mensagem_erro)

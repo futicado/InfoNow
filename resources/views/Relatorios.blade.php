@@ -102,7 +102,7 @@
                         </div>
                     </div>
                 </div>
-               
+
                 <div class="row g-3">
                   <form  method="POST" action="{{route('relatorio')}}">
                     @csrf
@@ -138,9 +138,9 @@
                                     <span aria-hidden="true">&times;</span>
                                   </button>
                                 <h4 class="alert-heading">Status - Conformidade</h4>
-                                <p><B>Realizado a predição com sucesso:</B> A Manutenção do item - <B>{{$nome}}</B> está em conformidade.</p>
+                                <p><B>Realizado a predição com sucesso:</B> A manutenção do item - <B>{{$nome}}</B> está em conformidade.</p>
                                 <hr style="height:2px;">
-                                <p class="mb-0">Continue realizando checklists periodicamente assim mantendo os equipamentos funcionando.</p>
+                                <p class="mb-0">Continue realizando <i>checklists</i> periodicamente assim mantendo os equipamentos funcionando.</p>
 
                               </div>
                             @endif
@@ -153,11 +153,10 @@
                                     <span aria-hidden="true">&times;</span>
                                   </button>
                                 <h4 class="alert-heading">Status - Inconformidade</h4>
-                                <p><B>Realizado a predição com sucesso:</B> A Manutenção do item - <B>{{$nome}}</B> não está em conformidade.<br>
-                                    <B>Sugestão:</B> Realize a manutenção imediatamente  evitando a parada inesperada</p>
+                                <p><B>Realizado a predição com sucesso:</B> A manutenção do item - <B>{{$nome}}</B> não está em conformidade.<br>
 
                                 <hr style="height:2px;">
-                                <p class="mb-0">Continue realizando checklists periodicamente assim evitando que os equipamentos parem de funcionar.</p>
+                                <p class="mb-0">Continue realizando <i>checklists</i> periodicamente assim evitando que os equipamentos parem de funcionar.</p>
                               </div>
                             @endif
 
@@ -166,9 +165,8 @@
                           <div class="card-body">
                             {{-- <footer class="blockquote-footer">Someone famous in <cite title="Source Title">Source Title</cite></footer> --}}
                             <blockquote class="blockquote mb-0">
-                              <p> A "feature_importances" identifica quais variáveis(Características) têm um impacto significativo no resultado final. <br>
-                                Essas características-chave podem ser exploradas para obter
-                                uma compreensão do resultado predito.</p>
+                              <p> A <i>"feature_importances"</i> identifica quais variáveis (características) têm um impacto significativo no resultado final. <br>
+                                Essas características-chave podem ser exploradas para obter uma compreensão do resultado predito.</p>
                                 <br>
                                 <var>
                                    <pre> {{@$info}}</pre>
@@ -177,7 +175,7 @@
                                 <p>Checklists realizados sobre item avaliado: {{$cont}}</p><br>
 
                                      <p id="demo">
-                                     <button onclick="myFunction()">Mais informações clique aqui</button>
+                                     <button onclick="myFunction()"> Maiores informações clique aqui</button>
                                      </p>
 
                                     <script>

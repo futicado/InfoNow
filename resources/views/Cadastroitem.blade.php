@@ -7,13 +7,14 @@
         background-repeat: no-repeat;
         height: 100%;
     }
+
 </style>
 
     <div class="container" >
         <div class="py-5 text-center">
             <a href="{{ route('dashboard') }}" ><img class="d-block mx-auto mb-4" src="img/logo.png" alt="" width="275" height="175"></a>
             <h2>Aplicação do Checklist</h2>
-            <p class="lead">Realize a avaliaçao do item utilizando as opções abaixo:<br><br>
+            <p class="lead">Realize a avaliação do item utilizando as opções abaixo:<br><br>
                 SIM<span style='font-size:20px;'> <img src={{ asset('img/01.png') }} height="24px" width="24px"></span>
                 N/A<span style='font-size:20px;'> <img src={{ asset('img/03.png') }} height="26px" width="26px"></span>
                 NÃO<span style='font-size:20px;'> <img src={{ asset('img/02.png') }} height="24px" width="24px"></span>
@@ -25,7 +26,7 @@
             <center><div class="card-body">
                 <div class="col-md-6 order-md-1">
 
-                <h4 class="mb-3">Informações</h4>
+                <h4 class="mb-3">Insira as informações</h4>
                 <hr class="mb-4">
                 <form class="needs-validation" novalidate action="{{route('cadastrosubmissao')}}" method="post">
                     @csrf
@@ -35,7 +36,7 @@
               <tr>
 
                   <div class="col-md-15 mb-3">
-                            <label for="firstName">Nome do Item</label>
+                            <label for="firstName">Nome do item</label>
                             <input class="form-control" id="firstName" name="nomeitem" list="textos" required />
                         <datalist id="textos">
                             @foreach ($list as $i )
@@ -132,7 +133,7 @@
                 </div></p>
             </tr>
             <tr>
-              <p class="lead"> 8 - A pressão do óleo está boa ? </p>
+              <p class="lead"> 8 - A pressão do óleo está boa? </p>
               <p class="lead">
               <div class="btn-group btn-group-toggle" data-toggle="buttons">
                 <label class="btn btn-warning ">
@@ -144,7 +145,7 @@
               </div></p>
             </tr>
             <tr>
-              <p class="lead"> 9 - A rotação do equipamento está funcionando ? </p>
+              <p class="lead"> 9 - A rotação do equipamento está funcionando? </p>
               <p class="lead">
               <div class="btn-group btn-group-toggle" data-toggle="buttons">
                 <label class="btn btn-warning ">
@@ -156,7 +157,7 @@
               </div></p>
             </tr>
             <tr>
-              <p class="lead"> 10 - Possui alguma parte solta ? </p>
+              <p class="lead"> 10 - Possui alguma parte solta? </p>
               <p class="lead">
               <div class="btn-group btn-group-toggle" data-toggle="buttons">
                 <label class="btn btn-warning ">
@@ -171,7 +172,10 @@
             </tbody>
             </table>
 
-                    <button class="btn btn-primary btn-lg btn-block" type="submit">Salvar</button>
+                    <div>
+                        <button class="btn btn-primary btn-block" style="width: 85px"  onclick="history.back()">Cancelar</button>
+                        <button class="btn btn-primary btn-block" style="width: 85px"  type="submit">Salvar</button>
+                    </div>
                 </form>
             </div>
         </div>

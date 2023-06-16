@@ -77,7 +77,7 @@ class Main extends Controller
 
 
           // realizar o cadastro no banco de dados - Dados obtidos do formulário
-          $nome = $request->input('nomeitem');
+          $nome = utf8_encode($request->input('nomeitem'));
           $op[0]= $request->input('options0');
           $op[1]= $request->input('options1');
           $op[2]= $request->input('options2');

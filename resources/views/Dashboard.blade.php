@@ -13,10 +13,8 @@
         </div>
         <div class="dropdown">
             <button class="btn btn-default dropdown-toggle" type="button"
-                data-toggle="dropdown">{{ session()->get('email') }}
-                <span class="caret"></span></button>
+                data-toggle="dropdown">{{ session()->get('email') }}</button>
             <ul class="dropdown-menu">
-
                 <a class="nav-link" href="{{ route('sair') }}">
                     <center>Sair</center>
                 </a>
